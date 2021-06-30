@@ -73,8 +73,8 @@ public class Compose extends DialogFragment {
                 String tweetContents = tweetBody.getText().toString();
                 if(tweetContents.length() == 0) {
                     Log.i(TAG, "No text entered.");
-                } else if (tweetContents.length() > 140) {
-                    Log.i(TAG, "Tweet cannot submit - greater than 140 chars");
+                } else if (tweetContents.length() > 280) {
+                    Log.i(TAG, "Tweet cannot submit - greater than 280 chars");
                 } else {
                     //sendData(tweetContents);
                     client.publishTweet(tweetContents, new JsonHttpResponseHandler() {

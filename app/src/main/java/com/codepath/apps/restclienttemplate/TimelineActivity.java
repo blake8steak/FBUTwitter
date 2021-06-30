@@ -57,6 +57,10 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
             showCompose();
             return true;
         }
+        if(item.getItemId() == R.id.signOut) {
+            client.clearAccessToken(); // forget who's logged in
+            finish(); // navigate backwards to Login screen
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -88,6 +92,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
         });
     }
 
+    //used for passing data between Compose fragment and TimelineActivity
     @Override
     public void getTweet(Tweet tweet) {
         //will do more parsing and whatnot here later for UI and stuff
