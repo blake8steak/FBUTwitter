@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import java.util.List;
@@ -56,6 +61,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        private static final String TAG = "TweetsAdapter";
         ImageView ivProfileImage;
         TextView tvBody;
         TextView tvScreenName;
@@ -70,11 +76,19 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         }
 
         public void bind(Tweet tweet) {
+            Log.i(TAG, "===== RUNNING BIND METHOD == RUNNING BIND METHOD =====");
+            //for avatars
+            RequestOptions circleAvi = new RequestOptions();
+            circleAvi = circleAvi.transforms(new CircleCrop());
+            // for tweet images
+            RequestOptions imgOptions = new RequestOptions();
+            imgOptions = imgOptions.transforms(new CenterCrop(), new RoundedCorners(20));
             tvBody.setText(tweet.body);
             tvScreenName.setText(tweet.user.screenName);
-            Glide.with(context).load(tweet.user.publicImageUrl).into(ivProfileImage);
+            Glide.with(context).load(tweet.user.publicImageUrl).apply(circleAvi).into(ivProfileImage);
             if(tweet.imageUrl != null) {
-                Glide.with(context).load(tweet.imageUrl).into(tweetImage);
+                tweetImage.setVisibility(View.VISIBLE);
+                Glide.with(context).load(tweet.imageUrl).apply(imgOptions).into(tweetImage);
             } else {
                 tweetImage.setVisibility(View.GONE);
             }
