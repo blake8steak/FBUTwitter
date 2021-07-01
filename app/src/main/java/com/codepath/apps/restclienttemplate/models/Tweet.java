@@ -20,13 +20,21 @@ public class Tweet {
     public String sincePosted;
     public String retweetCount;
     public String favoriteCount;
+    public String id;
 
     public static Tweet fromJson(JSONObject json) throws JSONException {
         Tweet tweet = new Tweet();
-        tweet.body = json.getString("text");
+        if(json.has("full_text")) {
+            Log.i(TAG, "using full text!");
+            tweet.body = json.getString("full_text");
+        } else {
+            tweet.body = json.getString("text");
+        }
         tweet.createdAt = json.getString("created_at");
         tweet.user = User.fromJson(json.getJSONObject("user"));
         tweet.postedOn = Date.parse(json.getString("created_at"));
+        //JSONObject data = json.getJSONArray("data").getJSONObject(0);
+        tweet.id = json.getString("id");
         int rtCount = json.getInt("retweet_count");
         if(rtCount > 1000) {
             tweet.retweetCount = String.format("%.1f",(double) rtCount / 1000)+"k";

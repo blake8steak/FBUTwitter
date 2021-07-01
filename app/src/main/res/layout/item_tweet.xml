@@ -13,7 +13,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="12dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -43,6 +43,37 @@
         android:textColor="#999999"
         android:textSize="12sp"
         android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/tvRetweetStatusIcon"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_above="@+id/tvScreenName"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="-5dp"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:clickable="true"
+        android:visibility="gone"
+        app:srcCompat="@drawable/ic_vector_retweet_stroke"
+        app:tint="#939393" />
+
+    <TextView
+        android:id="@+id/tvRetweedStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="0dp"
+        android:layout_toEndOf="@+id/tvRetweetStatusIcon"
+        android:fontFamily="sans-serif-black"
+        android:text="John Appleseed Retweeted"
+        android:textColor="#999999"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tvBody"

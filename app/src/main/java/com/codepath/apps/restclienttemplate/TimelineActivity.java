@@ -26,11 +26,14 @@ import okhttp3.Headers;
 
 public class TimelineActivity extends AppCompatActivity implements ComposeListener {
     public static final String TAG = "TimelineActivity";
+
     private SwipeRefreshLayout swipeContainer;
-    TwitterClient client;
-    RecyclerView rvTweets;
-    List<Tweet> tweets;
-    TweetsAdapter adapter;
+    private TwitterClient client;
+    private RecyclerView rvTweets;
+    private TweetsAdapter adapter;
+
+    private List<Tweet> tweets;
+    private long maxId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +44,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.twitter_logo_xml);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setTitle("Loading...");
 
 
         // Lookup the swipe container view
@@ -61,35 +65,78 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
         client = TwitterApp.getRestClient(this);
         rvTweets = findViewById(R.id.rvTweets);
 
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        EndlessRecyclerViewScrollListener endlessListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                Log.i(TAG, "onLoadMore running");
+                loadNextDataFromApi(page);
+            }
+        };
+        rvTweets.addOnScrollListener(endlessListener);
+
         tweets = new ArrayList();
         adapter = new TweetsAdapter(this, tweets);
-        rvTweets.setLayoutManager(new LinearLayoutManager(this));
+        rvTweets.setLayoutManager(linearLayoutManager);
         rvTweets.setAdapter(adapter);
         populateHomeTimeline();
     }
 
-    public void fetchTimelineAsync(int page) {
-        // Send the network request to fetch the updated data
-        // `client` here is an instance of Android Async HTTP
-        // getHomeTimeline is an example endpoint.
-        client.getHomeTimeline(new JsonHttpResponseHandler() {
+    // Append the next page of data into the adapter
+    // This method probably sends out a network request and appends new data items to your adapter.
+    public void loadNextDataFromApi(int offset) {
+        Log.i(TAG, "running loadNextDataFromApi");
+        // Send an API request to retrieve appropriate paginated data
+        client.getHomeTimeline(maxId, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 // Remember to CLEAR OUT old items before appending in the new ones
-                adapter.clear();
-                // ...the data has come back, add new items to your adapter...
+                Log.i(TAG, "+25 tweets");
                 try {
                     adapter.addAll(Tweet.fromJsonArray(json.jsonArray));
+                    adapter.notifyDataSetChanged();
+                    maxId = Long.valueOf(tweets.get(tweets.size()-1).id);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                // Now we call setRefreshing(false) to signal refresh has finished
                 swipeContainer.setRefreshing(false);
             }
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                 Log.d(TAG, "Fetch timeline error: " + throwable.toString());
+            }
+        });
+        //  --> Send the request including an offset value (i.e `page`) as a query parameter.
+        //  --> Deserialize and construct new model objects from the API response
+        //  --> Append the new data objects to the existing set of items inside the array of items
+        //  --> Notify the adapter of the new items made with `notifyItemRangeInserted()`
+    }
+
+    public void fetchTimelineAsync(int page) {
+        // Send the network request to fetch the updated data
+        // `client` here is an instance of Android Async HTTP
+        // getHomeTimeline is an example endpoint.
+        client.getInitTimeline(new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                // Clear old items before appending in the new ones
+                adapter.clear();
+                // Data has come back, add new items to adapter
+                try {
+                    adapter.addAll(Tweet.fromJsonArray(json.jsonArray));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                // call setRefreshing(false) to signal refresh has finished
+                swipeContainer.setRefreshing(false);
+                getSupportActionBar().setTitle("Twitter");
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.d(TAG, "Fetch timeline error: " + throwable.toString());
+                getSupportActionBar().setTitle("Twitter");
             }
         });
     }
@@ -125,22 +172,26 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
     }
 
     private void populateHomeTimeline() {
-        client.getHomeTimeline(new JsonHttpResponseHandler() {
+        client.getInitTimeline( new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 JSONArray jsonArray = json.jsonArray;
                 try {
+                    Log.i(TAG, "Success! "+json.toString());
                     tweets.addAll(Tweet.fromJsonArray(jsonArray));
                     adapter.notifyDataSetChanged();
+                    maxId = Long.valueOf(tweets.get(tweets.size()-1).id);
                 } catch (JSONException e) {
                     Log.e(TAG, "JSON Exception - Error parsing tweets", e);
                     e.printStackTrace();
                 }
+                getSupportActionBar().setTitle("Twitter");
             }
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                 Log.e(TAG, "failed to retrieve tweets: "+statusCode, throwable);
+                getSupportActionBar().setTitle("Twitter");
             }
         });
     }
