@@ -18,6 +18,8 @@ public class Tweet {
     public String imageUrl;
     public long postedOn;
     public String sincePosted;
+    public String retweetCount;
+    public String favoriteCount;
 
     public static Tweet fromJson(JSONObject json) throws JSONException {
         Tweet tweet = new Tweet();
@@ -25,10 +27,20 @@ public class Tweet {
         tweet.createdAt = json.getString("created_at");
         tweet.user = User.fromJson(json.getJSONObject("user"));
         tweet.postedOn = Date.parse(json.getString("created_at"));
-        Log.i(TAG, "timestamp: "+tweet.postedOn);
+        int rtCount = json.getInt("retweet_count");
+        if(rtCount > 1000) {
+            tweet.retweetCount = String.format("%.1f",(double) rtCount / 1000)+"k";
+        } else {
+            tweet.retweetCount = rtCount+"";
+        }
+        int favCount = json.getInt("favorite_count");
+        if(favCount > 1000) {
+            tweet.favoriteCount = String.format("%.1f",(double) favCount / 1000)+"k";
+        } else {
+            tweet.favoriteCount = favCount+"";
+        }
         long currentTime = System.currentTimeMillis();
         long seconds = (currentTime - tweet.postedOn) / 1000; //convert to seconds
-        Log.i(TAG, "seconds since posted: "+seconds);
         if(seconds < 60) {
             tweet.sincePosted = seconds + "s";
         } else if (seconds < 3600) {
@@ -44,7 +56,6 @@ public class Tweet {
         } catch (Exception e) {
             //Log.i(TAG, "No media for this tweet.");
         }
-        Log.i(TAG, "Data: "+tweet.imageUrl);
         return tweet;
     }
 

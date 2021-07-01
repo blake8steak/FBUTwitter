@@ -68,6 +68,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         TextView tvUsername;
         TextView tvTime;
         ImageView tweetImage;
+        TextView tvRetweetCount;
+        TextView tvFavoriteCount;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -77,6 +79,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tweetImage = itemView.findViewById(R.id.tweetImage);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             tvTime = itemView.findViewById(R.id.tvTime);
+            tvRetweetCount = itemView.findViewById(R.id.tvRetweetCount);
+            tvFavoriteCount = itemView.findViewById(R.id.tvFavoriteCount);
         }
 
         public void bind(Tweet tweet) {
@@ -90,6 +94,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvScreenName.setText(tweet.user.name);
             tvUsername.setText("@"+tweet.user.screenName);
             tvTime.setText(tweet.sincePosted);
+            tvRetweetCount.setText(tweet.retweetCount);
+            tvFavoriteCount.setText(tweet.favoriteCount);
             Glide.with(context).load(tweet.user.publicImageUrl).apply(circleAvi).into(ivProfileImage);
             if(tweet.imageUrl != null) {
                 tweetImage.setVisibility(View.VISIBLE);

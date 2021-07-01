@@ -25,7 +25,7 @@
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:fontFamily="sans-serif-black"
-        android:text="Bubba McCooter"
+        android:text="Bubba（ばばちゃん）"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -69,7 +69,7 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/ivRetweet"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_below="@+id/tweetImage"
@@ -82,36 +82,36 @@
         app:tint="#939393" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/ivFavorite"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_below="@+id/tweetImage"
         android:layout_centerVertical="true"
         android:layout_marginStart="60dp"
         android:layout_marginTop="7dp"
-        android:layout_toEndOf="@+id/imageView"
+        android:layout_toEndOf="@+id/ivRetweet"
         android:clickable="true"
         app:srcCompat="@drawable/ic_vector_heart_stroke"
         app:tint="#939393" />
 
     <TextView
-        android:id="@+id/retweetCountLabel"
+        android:id="@+id/tvRetweetCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView"
+        android:layout_alignTop="@+id/ivRetweet"
         android:layout_marginStart="5dp"
         android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/imageView"
+        android:layout_toEndOf="@+id/ivRetweet"
         android:text="2.9K" />
 
     <TextView
-        android:id="@+id/retweetCountLabel2"
+        android:id="@+id/tvFavoriteCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/imageView3"
+        android:layout_alignTop="@+id/ivFavorite"
         android:layout_marginStart="5dp"
         android:layout_marginTop="0dp"
-        android:layout_toEndOf="@+id/imageView3"
+        android:layout_toEndOf="@+id/ivFavorite"
         android:text="3.1K" />
 
     <TextView
@@ -120,7 +120,7 @@
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/tvScreenName"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="0dp"
+        android:layout_marginEnd="20dp"
         android:text="31m" />
 
 </RelativeLayout>
