@@ -12,16 +12,16 @@
         android:layout_height="45dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/tvScreenName"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/ivProfileImage"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:fontFamily="sans-serif-black"
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvScreenName"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:layout_marginEnd="2dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:fontFamily="sans-serif-black"
@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvUsername"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="3dp"
         android:layout_toEndOf="@+id/ivProfileImage"
@@ -63,9 +63,64 @@
         android:layout_height="170dp"
         android:layout_below="@+id/tvBody"
         android:layout_alignParentEnd="false"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/tweetImage"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="7dp"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_vector_retweet_stroke"
+        app:tint="#939393" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/tweetImage"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="7dp"
+        android:layout_toEndOf="@+id/imageView"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_vector_heart_stroke"
+        app:tint="#939393" />
+
+    <TextView
+        android:id="@+id/retweetCountLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/imageView"
+        android:text="2.9K" />
+
+    <TextView
+        android:id="@+id/retweetCountLabel2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView3"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/imageView3"
+        android:text="3.1K" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/tvScreenName"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="0dp"
+        android:text="31m" />
 
 </RelativeLayout>

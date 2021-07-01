@@ -56,10 +56,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
             }
         });
         // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright);
 
         client = TwitterApp.getRestClient(this);
         rvTweets = findViewById(R.id.rvTweets);
@@ -113,6 +110,9 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
         if(item.getItemId() == R.id.signOut) {
             client.clearAccessToken(); // forget who's logged in
             finish(); // navigate backwards to Login screen
+        }
+        if(item.getItemId() == android.R.id.home) {
+            rvTweets.smoothScrollToPosition(0);
         }
         return super.onOptionsItemSelected(item);
     }
