@@ -5,11 +5,12 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@Parcel
 public class Tweet {
     private static final String TAG = "Tweet";
     public String body;
@@ -21,6 +22,8 @@ public class Tweet {
     public String retweetCount;
     public String favoriteCount;
     public String id;
+
+    public Tweet() {}
 
     public static Tweet fromJson(JSONObject json) throws JSONException {
         Tweet tweet = new Tweet();

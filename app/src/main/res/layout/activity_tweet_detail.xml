@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TweetDetailActivity">
+
+    <ImageView
+        android:id="@+id/ivProfileImage2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="29dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/tvScreenName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ivProfileImage2"
+        android:layout_alignParentStart="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="87dp"
+        android:layout_marginTop="15dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center_horizontal"
+        android:text="Bubba（ばばちゃん）"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivProfileImage2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvUsername2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvScreenName2"
+        android:layout_alignParentEnd="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="153dp"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center_horizontal"
+        android:text="\@TestUser123"
+        android:textAlignment="center"
+        android:textColor="#999999"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/ivProfileImage2"
+        app:layout_constraintTop_toBottomOf="@+id/tvScreenName2" />
+
+    <TextView
+        android:id="@+id/tvBody2"
+        android:layout_width="309dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUsername2"
+        android:layout_alignStart="@+id/tvScreenName2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="-50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="50dp"
+        android:autoLink="all"
+        android:linksClickable="true"
+        android:text="This is an example tweet #yuhhh"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ivProfileImage2"
+        app:layout_constraintTop_toBottomOf="@+id/tvUsername2" />
+
+    <ImageView
+        android:id="@+id/ivRetweet2"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/tvBody2"
+        android:layout_alignStart="@+id/tvBody2"
+        android:layout_marginStart="-4dp"
+        android:layout_marginTop="5dp"
+        android:clickable="true"
+        app:layout_constraintTop_toTopOf="@+id/tvRetweetCount2"
+        app:srcCompat="@drawable/ic_vector_retweet_stroke"
+        app:tint="#939393"
+        tools:layout_editor_absoluteX="55dp" />
+
+    <ImageView
+        android:id="@+id/ivFavorite2"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignTop="@+id/tvRetweetCount2"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/tvRetweetCount2"
+        android:clickable="true"
+        app:srcCompat="@drawable/ic_vector_heart_stroke"
+        app:tint="#939393"
+        tools:layout_editor_absoluteX="160dp"
+        tools:layout_editor_absoluteY="323dp" />
+
+    <TextView
+        android:id="@+id/tvFavoriteCount2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivFavorite2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_toEndOf="@+id/ivFavorite2"
+        android:text="3.1K"
+        tools:layout_editor_absoluteX="180dp"
+        tools:layout_editor_absoluteY="323dp" />
+
+    <TextView
+        android:id="@+id/tvRetweetCount2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivRetweet2"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="0dp"
+        android:layout_toEndOf="@+id/ivRetweet2"
+        android:text="2.9K"
+        tools:layout_editor_absoluteX="96dp" />
+
+    <TextView
+        android:id="@+id/tvTime2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ivProfileImage2"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="15dp"
+        android:text="31m"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvScreenName2"
+        app:layout_constraintTop_toTopOf="parent" />
+</RelativeLayout>

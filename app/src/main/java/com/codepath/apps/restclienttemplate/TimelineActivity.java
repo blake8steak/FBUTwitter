@@ -43,8 +43,8 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.twitter_logo_xml);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Loading...");
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("Loading...");
 
 
         // Lookup the swipe container view
@@ -69,7 +69,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
         EndlessRecyclerViewScrollListener endlessListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
-                Log.i(TAG, "onLoadMore running");
                 loadNextDataFromApi(page);
             }
         };
@@ -107,10 +106,6 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
                 Log.d(TAG, "Fetch timeline error: " + throwable.toString());
             }
         });
-        //  --> Send the request including an offset value (i.e `page`) as a query parameter.
-        //  --> Deserialize and construct new model objects from the API response
-        //  --> Append the new data objects to the existing set of items inside the array of items
-        //  --> Notify the adapter of the new items made with `notifyItemRangeInserted()`
     }
 
     public void fetchTimelineAsync(int page) {

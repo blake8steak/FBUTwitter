@@ -13,7 +13,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="12dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -86,7 +85,9 @@
         android:layout_marginEnd="3dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:text="This is an example tweet #yuhhh"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:autoLink="all"
+        android:linksClickable="true"/>
 
     <ImageView
         android:id="@+id/tweetImage"
@@ -153,5 +154,14 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
         android:text="31m" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/ivFavorite"
+        android:layout_marginTop="15dp"
+        android:background="?attr/colorControlHighlight">
+
+    </View>
 
 </RelativeLayout>
