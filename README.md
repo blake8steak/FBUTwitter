@@ -52,7 +52,7 @@ GIF created with [Kap](https://getkap.co/).
 
 ## Notes
 
-This was definitely a little trickier than the past two applications, and I had hoped to complete more of the optional features listed (especially the RT/Favorite) but I unfortunately ran out of time.
+This was definitely a little trickier than the past two applications, and I had hoped to complete more of the optional features listed (especially the RT/Favorite) but I unfortunately ran out of time (got stuck for longer than expected getting infinite scroll to work.)
 
 Still, overall I am happy with how it turned out for the most part - wish there was more functionality built in (replies, tap to view full image, etc) but this is still a decent, clean Twitter client and I learned a lot from this project.
 
