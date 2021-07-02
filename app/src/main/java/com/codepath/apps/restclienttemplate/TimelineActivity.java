@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -94,7 +96,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
                 try {
                     adapter.addAll(Tweet.fromJsonArray(json.jsonArray));
                     adapter.notifyDataSetChanged();
-                    maxId = Long.valueOf(tweets.get(tweets.size()-1).id);
+                    maxId = Long.valueOf(tweets.get(tweets.size()-1).id)-1;
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -175,7 +177,7 @@ public class TimelineActivity extends AppCompatActivity implements ComposeListen
                     Log.i(TAG, "Success! "+json.toString());
                     tweets.addAll(Tweet.fromJsonArray(jsonArray));
                     adapter.notifyDataSetChanged();
-                    maxId = Long.valueOf(tweets.get(tweets.size()-1).id);
+                    maxId = Long.valueOf(tweets.get(tweets.size()-1).id)-1;
                 } catch (JSONException e) {
                     Log.e(TAG, "JSON Exception - Error parsing tweets", e);
                     e.printStackTrace();
